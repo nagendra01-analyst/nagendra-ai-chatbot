@@ -6,375 +6,306 @@
 <title>Chat with Nagendra | Marketing Analyst</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',sans-serif;background:#0f172a;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:16px}
-.wrapper{width:100%;max-width:480px}
-.header{background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:20px 20px 0 0;padding:18px 20px;display:flex;align-items:center;gap:14px}
-.avatar{width:52px;height:52px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;box-shadow:0 0 0 3px rgba(255,255,255,0.3)}
-.header-info h2{color:#fff;font-size:1.05rem;font-weight:700}
-.header-info p{color:rgba(255,255,255,0.8);font-size:0.78rem;margin-top:2px}
-.online{display:inline-block;width:8px;height:8px;background:#4ade80;border-radius:50%;margin-right:5px;animation:blink 1.5s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
-.chat-box{background:#1e293b;height:420px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}
-.chat-box::-webkit-scrollbar{width:4px}
-.chat-box::-webkit-scrollbar-thumb{background:#334155;border-radius:4px}
-.msg{max-width:82%;padding:10px 14px;border-radius:16px;font-size:0.88rem;line-height:1.55;animation:fadeIn 0.25s ease}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
-.msg.bot{background:#273549;color:#e2e8f0;border-bottom-left-radius:4px;align-self:flex-start}
-.msg.user{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
-.msg.bot strong{color:#a5b4fc}
-.typing{display:flex;gap:4px;align-items:center;padding:12px 14px;background:#273549;border-radius:16px;border-bottom-left-radius:4px;width:60px;align-self:flex-start}
-.typing span{width:7px;height:7px;background:#6366f1;border-radius:50%;animation:bounce 1.2s infinite}
-.typing span:nth-child(2){animation-delay:0.2s}
-.typing span:nth-child(3){animation-delay:0.4s}
-@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
-.suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:10px 16px;background:#1e293b;border-top:1px solid #2d3748}
-.sug-btn{background:#273549;color:#a5b4fc;border:1px solid #334155;border-radius:20px;padding:5px 12px;font-size:0.76rem;cursor:pointer;transition:all 0.2s;white-space:nowrap}
-.sug-btn:hover{background:#6366f1;color:#fff;border-color:#6366f1}
-.input-area{display:flex;gap:8px;padding:12px 14px;background:#273549;border-radius:0 0 20px 20px;border-top:1px solid #334155}
-.input-area input{flex:1;background:#0f172a;border:1px solid #334155;border-radius:10px;padding:10px 14px;color:#e2e8f0;font-size:0.88rem;outline:none;transition:border 0.2s}
-.input-area input:focus{border-color:#6366f1}
-.input-area input::placeholder{color:#475569}
-.send-btn{background:linear-gradient(135deg,#6366f1,#8b5cf6);border:none;border-radius:10px;width:42px;height:42px;color:#fff;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:opacity 0.2s}
-.send-btn:hover{opacity:0.85}
-/* SCHEDULE FORM */
-.form-bubble{background:#273549;border-radius:16px;border-bottom-left-radius:4px;padding:16px;max-width:90%;align-self:flex-start;animation:fadeIn 0.3s ease}
-.form-bubble h4{color:#a5b4fc;margin-bottom:12px;font-size:0.92rem}
-.form-bubble input,.form-bubble select{width:100%;background:#0f172a;border:1px solid #334155;border-radius:8px;padding:8px 12px;color:#e2e8f0;font-size:0.82rem;margin-bottom:8px;outline:none;font-family:inherit}
-.form-bubble input::placeholder{color:#475569}
-.form-bubble input:focus,.form-bubble select:focus{border-color:#6366f1}
-.form-bubble select option{background:#1e293b}
-.submit-btn{width:100%;background:linear-gradient(135deg,#6366f1,#8b5cf6);border:none;border-radius:8px;padding:10px;color:#fff;font-weight:600;font-size:0.85rem;cursor:pointer;margin-top:4px;transition:opacity 0.2s}
-.submit-btn:hover{opacity:0.85}
-.footer-note{text-align:center;color:#475569;font-size:0.72rem;padding:8px;background:#0f172a;border-radius:0 0 20px 20px;margin-top:-8px}
+body{font-family:Segoe UI,Arial,sans-serif;background:#0f172a;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px}
+.wrap{width:100%;max-width:500px;border-radius:20px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,0.5)}
+.hdr{background:linear-gradient(135deg,#6366f1,#8b5cf6);padding:16px 20px;display:flex;align-items:center;gap:14px}
+.av{width:54px;height:54px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;border:3px solid rgba(255,255,255,0.4)}
+.hi h2{color:#fff;font-size:1.05rem;font-weight:700;margin:0}
+.hi p{color:rgba(255,255,255,0.85);font-size:0.78rem;margin:3px 0 0}
+.dot{display:inline-block;width:8px;height:8px;background:#4ade80;border-radius:50%;margin-right:5px;animation:bl 1.5s infinite}
+@keyframes bl{0%,100%{opacity:1}50%{opacity:0.2}}
+.box{background:#1e293b;height:400px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px}
+.box::-webkit-scrollbar{width:4px}.box::-webkit-scrollbar-thumb{background:#334155;border-radius:4px}
+.m{max-width:85%;padding:10px 14px;border-radius:16px;font-size:0.875rem;line-height:1.55;word-wrap:break-word;animation:fi 0.25s ease}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.b{background:#273549;color:#e2e8f0;border-bottom-left-radius:4px;align-self:flex-start}
+.u{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.tp{display:flex;gap:4px;align-items:center;background:#273549;border-radius:16px;border-bottom-left-radius:4px;padding:12px 14px;width:58px;align-self:flex-start}
+.tp span{width:7px;height:7px;background:#6366f1;border-radius:50%;animation:bo 1.2s infinite}
+.tp span:nth-child(2){animation-delay:.2s}.tp span:nth-child(3){animation-delay:.4s}
+@keyframes bo{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+.sugg{display:flex;flex-wrap:wrap;gap:6px;padding:10px 14px;background:#1e293b;border-top:1px solid #2d3748}
+.sb{background:#273549;color:#a5b4fc;border:1px solid #334155;border-radius:20px;padding:5px 12px;font-size:0.76rem;cursor:pointer;transition:all 0.2s}
+.sb:hover{background:#6366f1;color:#fff;border-color:#6366f1}
+.inp{display:flex;gap:8px;padding:12px;background:#273549;border-top:1px solid #334155}
+.inp input{flex:1;background:#0f172a;border:1px solid #334155;border-radius:10px;padding:10px 14px;color:#e2e8f0;font-size:0.88rem;outline:none;transition:border .2s;font-family:inherit}
+.inp input:focus{border-color:#6366f1}
+.inp input::placeholder{color:#475569}
+.snd{background:linear-gradient(135deg,#6366f1,#8b5cf6);border:none;border-radius:10px;width:42px;height:42px;color:#fff;font-size:1.1rem;cursor:pointer;flex-shrink:0;transition:opacity .2s}
+.snd:hover{opacity:0.8}
+.fn{text-align:center;color:#475569;font-size:0.7rem;padding:7px;background:#0f172a}
+.fb{background:#273549;border-radius:16px;border-bottom-left-radius:4px;padding:16px;max-width:90%;align-self:flex-start;animation:fi 0.3s ease}
+.fb h4{color:#a5b4fc;margin-bottom:12px;font-size:0.9rem}
+.fb input,.fb select{width:100%;background:#0f172a;border:1px solid #334155;border-radius:8px;padding:8px 12px;color:#e2e8f0;font-size:0.82rem;margin-bottom:8px;outline:none;font-family:inherit}
+.fb input:focus,.fb select:focus{border-color:#6366f1}
+.fb select option{background:#1e293b}
+.fb input::placeholder{color:#475569}
+.ok{width:100%;background:linear-gradient(135deg,#6366f1,#8b5cf6);border:none;border-radius:8px;padding:10px;color:#fff;font-weight:700;font-size:0.85rem;cursor:pointer;margin-top:4px}
+.ok:hover{opacity:0.85}
 </style>
 </head>
 <body>
-<div class="wrapper">
-  <div class="header">
-    <div class="avatar">👨‍💼</div>
-    <div class="header-info">
-      <h2>Nagendra Babu Gugulothu</h2>
-      <p><span class="online"></span>Marketing Analyst · New York, USA</p>
-    </div>
-  </div>
-
-  <div class="chat-box" id="chatBox"></div>
-
-  <div class="suggestions" id="suggestions">
-    <button class="sug-btn" onclick="sendSuggestion('Tell me about yourself')">👋 About</button>
-    <button class="sug-btn" onclick="sendSuggestion('What are your skills?')">🛠 Skills</button>
-    <button class="sug-btn" onclick="sendSuggestion('What is your experience?')">💼 Experience</button>
-    <button class="sug-btn" onclick="sendSuggestion('Schedule an interview')">📅 Schedule</button>
-    <button class="sug-btn" onclick="sendSuggestion('What tools do you use?')">🔧 Tools</button>
-    <button class="sug-btn" onclick="sendSuggestion('Contact info')">📞 Contact</button>
-  </div>
-
-  <div class="input-area">
-    <input type="text" id="userInput" placeholder="Ask me anything..." onkeydown="if(event.key==='Enter')sendMessage()"/>
-    <button class="send-btn" onclick="sendMessage()">➤</button>
-  </div>
-  <div class="footer-note">💡 Powered by Nagendra's personal AI assistant</div>
+<div class="wrap">
+ <div class="hdr">
+  <div class="av">&#128104;&#8205;&#128188;</div>
+  <div class="hi"><h2>Nagendra Babu Gugulothu</h2><p><span class="dot"></span>Marketing Analyst &bull; New York, USA</p></div>
+ </div>
+ <div class="box" id="box"></div>
+ <div class="sugg">
+  <button class="sb" id="s1">&#128075; About</button>
+  <button class="sb" id="s2">&#128736; Skills</button>
+  <button class="sb" id="s3">&#128188; Experience</button>
+  <button class="sb" id="s4">&#128197; Schedule</button>
+  <button class="sb" id="s5">&#128222; Contact</button>
+  <button class="sb" id="s6">&#127891; Education</button>
+ </div>
+ <div class="inp">
+  <input type="text" id="inp" placeholder="Ask me anything..." />
+  <button class="snd" id="snd">&#9658;</button>
+ </div>
+ <div class="fn">&#128161; Powered by Nagendra's personal AI assistant</div>
 </div>
-
 <script>
-const PROFILE = {
-  name: "Nagendra Babu Gugulothu",
-  email: "gugulothunagendra4@gmail.com",
-  phone: "(640) 500-1415",
-  location: "New York, USA",
-  education: "Master of Science in Computer Science (Data Analytics), University of Bridgeport, USA",
-  experience: "4+ years",
-  role: "Marketing Analyst",
-  skills: ["Digital Marketing","Marketing Analytics","Growth Marketing","Performance Marketing","Campaign Optimization","SEO & SEM Analytics","Google Analytics 4 (GA4)","Google Ads","Meta Ads","LinkedIn Ads","Customer Segmentation","Attribution Modeling","Marketing Mix Modeling (MMM)","A/B Testing","Tableau","Power BI","SQL","Python","BigQuery","Snowflake","Marketing Dashboards","Customer Journey Analytics","Funnel Optimization","Conversion Rate Optimization (CRO)"],
-  responsibilities: ["Campaign performance analysis","Marketing dashboard development","Customer segmentation","Attribution analysis","ROI measurement","Growth analytics","Marketing automation analytics","Predictive analytics","SEO performance tracking","Conversion optimization"],
-  workAuth: "I am authorized to work in the United States and do not require sponsorship at this time.",
-  availability: "Monday through Friday, flexible based on your schedule"
-};
+(function(){
 
-let scheduleMode = false;
-let scheduleStep = 0;
-let scheduleData = {};
+var box = document.getElementById("box");
+var inp = document.getElementById("inp");
+var snd = document.getElementById("snd");
 
-function getBotReply(msg) {
-  const m = msg.toLowerCase().trim();
-
-  // Greetings
-  if (/^(hi|hello|hey|good morning|good afternoon|good evening|howdy|what'?s up)/i.test(m)) {
-    return "Hey there! 👋 Great to connect with you! I'm Nagendra Babu Gugulothu, a Marketing Analyst based in New York. I have 4+ years of experience in digital marketing, analytics, and data-driven campaign optimization. How can I help you today?";
-  }
-
-  // About
-  if (/about|introduce|yourself|who are you|background/i.test(m)) {
-    return "I'm a Marketing Analyst with more than 4 years of experience in digital marketing, marketing analytics, campaign optimization, customer segmentation, and growth analytics. I've worked extensively with <strong>SQL, Python, GA4, Tableau, Power BI, Google Ads, Meta Ads</strong>, and marketing attribution models. I enjoy using data to improve marketing performance, increase conversions, and drive business growth. 🚀";
-  }
-
-  // Skills
-  if (/skill|expertise|speciali|proficien|know|good at|capable/i.test(m)) {
-    return "Here are my core skills and expertise:
-
-📊 <strong>Analytics:</strong> GA4, Tableau, Power BI, SQL, Python, BigQuery, Snowflake
-
-📣 <strong>Digital Marketing:</strong> Google Ads, Meta Ads, LinkedIn Ads, SEO & SEM
-
-🧠 <strong>Strategy:</strong> Attribution Modeling, MMM, A/B Testing, CRO, Customer Segmentation
-
-📈 <strong>Reporting:</strong> Marketing Dashboards, Customer Journey Analytics, Funnel Optimization";
-  }
-
-  // Experience
-  if (/experience|year|work|career|professional|history|job/i.test(m)) {
-    return "I have <strong>4+ years of professional experience</strong> as a Marketing Analyst. In my current role, I focus on campaign performance analysis, marketing dashboard development, customer segmentation, attribution analysis, and ROI measurement. I love turning complex data into actionable marketing insights that drive real business results. 💼";
-  }
-
-  // Education
-  if (/educat|degree|universit|college|study|master|ms |m.s/i.test(m)) {
-    return "🎓 I hold a <strong>Master of Science in Computer Science (Data Analytics)</strong> from the <strong>University of Bridgeport, USA</strong>. This gave me a strong foundation in data science, statistical modeling, and advanced analytics — which I apply daily in my marketing analytics work.";
-  }
-
-  // Tools
-  if (/tool|software|platform|technolog|use|stack/i.test(m)) {
-    return "I work with a powerful tech stack every day:
-
-🔧 <strong>Data & Analytics:</strong> SQL, Python, BigQuery, Snowflake
-📊 <strong>Visualization:</strong> Tableau, Power BI
-📣 <strong>Ad Platforms:</strong> Google Ads, Meta Ads, LinkedIn Ads
-📈 <strong>Web Analytics:</strong> Google Analytics 4 (GA4)
-⚙️ <strong>Other:</strong> Marketing automation tools, CRM platforms";
-  }
-
-  // Current role / responsibilities
-  if (/current|role|responsib|day to day|daily|what do you do/i.test(m)) {
-    return "In my current role as a <strong>Marketing Analyst</strong>, my daily work includes:
-
-✅ Campaign performance analysis
-✅ Marketing dashboard development
-✅ Customer segmentation & attribution analysis
-✅ ROI & growth analytics
-✅ Predictive analytics & SEO tracking
-✅ Conversion rate optimization (CRO)
-
-Every day is about turning data into decisions that grow the business! 📈";
-  }
-
-  // Why hire / strengths
-  if (/why hire|why should|strength|value|bring|offer|reason/i.test(m)) {
-    return "I bring a strong combination of <strong>marketing knowledge, analytical thinking, and technical skills</strong>. I have hands-on experience improving campaign performance, building dashboards, analyzing customer behavior, and supporting data-driven marketing decisions. I'm a quick learner, collaborative team member, and always focused on delivering measurable business results. 🎯";
-  }
-
-  // Why interested in role
-  if (/why interest|why this role|why apply|motivat|passion/i.test(m)) {
-    return "I'm passionate about using data to solve real business problems. Roles in marketing analytics allow me to combine my love of data with strategic marketing thinking — improving customer engagement, optimizing campaigns, and driving growth. I'm always excited by opportunities to contribute meaningfully to a growing organization. 🌟";
-  }
-
-  // Work authorization / visa
-  if (/visa|authoriz|sponsor|work permit|citizen|status|green card/i.test(m)) {
-    return "✅ " + PROFILE.workAuth;
-  }
-
-  // Location / relocate
-  if (/locat|where|city|state|reloc|remote|hybrid|onsite|on-site/i.test(m)) {
-    return "📍 I'm currently based in <strong>New York, USA</strong>. I'm open to remote, hybrid, or on-site roles. I'm also open to relocation for the right opportunity!";
-  }
-
-  // Salary / compensation
-  if (/salary|compensat|pay|expect|rate|package/i.test(m)) {
-    return "I'm open to discussing compensation based on the role, responsibilities, and the overall opportunity. I'm looking for a competitive package that reflects my 4+ years of experience in marketing analytics. Happy to discuss further! 😊";
-  }
-
-  // Contact info
-  if (/contact|email|phone|reach|number|linkedin/i.test(m)) {
-    return "📬 Here are my contact details:
-
-👤 <strong>Name:</strong> Nagendra Babu Gugulothu
-📧 <strong>Email:</strong> gugulothunagendra4@gmail.com
-📞 <strong>Phone:</strong> (640) 500-1415
-📍 <strong>Location:</strong> New York, USA
-
-Feel free to reach out anytime — I'm always happy to connect!";
-  }
-
-  // Schedule / interview / availability
-  if (/schedul|interview|meet|availab|call|connect|appoint|time/i.test(m)) {
-    return "SCHEDULE_TRIGGER";
-  }
-
-  // LinkedIn / resume / cv
-  if (/linkedin|resume|cv|portfolio/i.test(m)) {
-    return "I'd be happy to share my resume or LinkedIn profile! Please reach out directly at 📧 <strong>gugulothunagendra4@gmail.com</strong> or call me at 📞 <strong>(640) 500-1415</strong> and I'll send it over right away.";
-  }
-
-  // GA4 / Google Analytics specific
-  if (/ga4|google analytics|analytics track/i.test(m)) {
-    return "I have strong hands-on experience with <strong>Google Analytics 4 (GA4)</strong> — setting up events, conversions, funnels, audiences, and custom reports. I use GA4 alongside BigQuery exports for advanced analysis and to build attribution models that inform marketing spend decisions. 📊";
-  }
-
-  // Attribution
-  if (/attribut|mmm|marketing mix|multi.touch/i.test(m)) {
-    return "Attribution modeling is one of my specialties! I've worked with <strong>multi-touch attribution models</strong> (first-touch, last-touch, linear, data-driven) and <strong>Marketing Mix Modeling (MMM)</strong> to understand which channels truly drive conversions. This helps optimize budget allocation across Google Ads, Meta Ads, and other channels. 🎯";
-  }
-
-  // A/B testing
-  if (/a/b|ab test|split test|experiment/i.test(m)) {
-    return "I love A/B testing! I've designed and analyzed numerous experiments — from landing page copy and creative variations to email subject lines and CTA buttons. I use statistical significance testing to ensure results are reliable before making decisions. 🔬";
-  }
-
-  // SQL / Python
-  if (/sql|python|bigquery|snowflake|code|query|data/i.test(m)) {
-    return "I'm proficient in both <strong>SQL and Python</strong> for marketing analytics. I use SQL daily for querying BigQuery and Snowflake databases, building data pipelines, and creating segmentation queries. With Python, I automate reporting, run statistical analyses, and build predictive models for campaign optimization. 💻";
-  }
-
-  // Tableau / Power BI
-  if (/tableau|power bi|dashboard|visual|report/i.test(m)) {
-    return "I build professional <strong>marketing dashboards in both Tableau and Power BI</strong>! My dashboards cover campaign performance, customer journeys, attribution, ROI tracking, and funnel analysis. I design them to be executive-ready — clear, actionable, and connected to live data sources. 📊";
-  }
-
-  // Goodbye
-  if (/bye|goodbye|see you|thanks|thank you|that'?s all/i.test(m)) {
-    return "It was great chatting with you! 😊 If you'd like to schedule an interview or have more questions, feel free to reach out at <strong>gugulothunagendra4@gmail.com</strong> or call <strong>(640) 500-1415</strong>. Have a wonderful day! 👋";
-  }
-
-  // Fallback
-  return "Great question! I'd be happy to discuss that further. The best way to get detailed answers is to schedule a quick call with me. I'm available Monday–Friday and flexible with timing. Want to schedule an interview or call? Just type <em>'schedule an interview'</em> and I'll set it up! 😊";
-}
-
-function appendMsg(text, sender, isHTML = true) {
-  const box = document.getElementById('chatBox');
-  const div = document.createElement('div');
-  div.className = 'msg ' + sender;
-  if (isHTML) div.innerHTML = text.replace(/\n/g, '<br/>');
-  else div.textContent = text;
-  box.appendChild(div);
+function addMsg(txt, cls) {
+  var d = document.createElement("div");
+  d.className = "m " + cls;
+  d.innerHTML = txt;
+  box.appendChild(d);
   box.scrollTop = box.scrollHeight;
-  return div;
+  return d;
 }
 
 function showTyping() {
-  const box = document.getElementById('chatBox');
-  const div = document.createElement('div');
-  div.className = 'typing';
-  div.id = 'typingIndicator';
-  div.innerHTML = '<span></span><span></span><span></span>';
-  box.appendChild(div);
+  var d = document.createElement("div");
+  d.className = "tp"; d.id = "tp";
+  d.innerHTML = "<span></span><span></span><span></span>";
+  box.appendChild(d);
   box.scrollTop = box.scrollHeight;
 }
 
 function removeTyping() {
-  const t = document.getElementById('typingIndicator');
-  if (t) t.remove();
+  var t = document.getElementById("tp");
+  if (t) t.parentNode.removeChild(t);
+}
+
+function getReply(msg) {
+  var m = msg.toLowerCase();
+
+  if (/^(hi|hello|hey|good morning|good afternoon|good evening|howdy|what.s up)/i.test(m)) {
+    return "Hey there! &#128075; Great to connect! I'm <b>Nagendra Babu Gugulothu</b>, a Marketing Analyst based in New York. I have 4+ years of experience in digital marketing, analytics, and data-driven campaign optimization. How can I help you today?";
+  }
+
+  if (/about|introduce|yourself|who are you|background/i.test(m)) {
+    return "I'm a <b>Marketing Analyst with 4+ years of experience</b> in digital marketing, marketing analytics, campaign optimization, customer segmentation, and growth analytics.<br><br>I've worked extensively with <b>SQL, Python, GA4, Tableau, Power BI, Google Ads, Meta Ads</b>, and marketing attribution models. I enjoy using data to improve marketing performance, increase conversions, and drive business growth. &#128640;";
+  }
+
+  if (/skill|expertise|speciali|proficien|know|good at|capable/i.test(m)) {
+    return "Here are my core skills:<br><br>&#128202; <b>Analytics:</b> GA4, Tableau, Power BI, SQL, Python, BigQuery, Snowflake<br>&#128226; <b>Digital Marketing:</b> Google Ads, Meta Ads, LinkedIn Ads, SEO &amp; SEM<br>&#129504; <b>Strategy:</b> Attribution Modeling, MMM, A/B Testing, CRO, Customer Segmentation<br>&#128200; <b>Reporting:</b> Marketing Dashboards, Customer Journey Analytics, Funnel Optimization";
+  }
+
+  if (/experience|year|career|professional|history|job|work/i.test(m)) {
+    return "I have <b>4+ years of professional experience</b> as a Marketing Analyst. In my current role I focus on:<br><br>&#10003; Campaign performance analysis<br>&#10003; Marketing dashboard development<br>&#10003; Customer segmentation &amp; attribution analysis<br>&#10003; ROI measurement &amp; growth analytics<br>&#10003; Predictive analytics &amp; SEO tracking<br>&#10003; Conversion rate optimization (CRO)<br><br>I love turning complex data into actionable insights that drive real business results! &#128188;";
+  }
+
+  if (/educat|degree|universit|college|study|master|ms |m\.s/i.test(m)) {
+    return "&#127891; I hold a <b>Master of Science in Computer Science (Data Analytics)</b> from the <b>University of Bridgeport, USA</b>. This gave me a strong foundation in data science, statistical modeling, and advanced analytics which I apply daily in my marketing work.";
+  }
+
+  if (/tool|software|platform|technolog|stack/i.test(m)) {
+    return "My tech stack:<br><br>&#128187; <b>Data:</b> SQL, Python, BigQuery, Snowflake<br>&#128202; <b>Visualization:</b> Tableau, Power BI<br>&#128226; <b>Ad Platforms:</b> Google Ads, Meta Ads, LinkedIn Ads<br>&#128200; <b>Web Analytics:</b> Google Analytics 4 (GA4)<br>&#9881; <b>Other:</b> Marketing automation, CRM platforms";
+  }
+
+  if (/current|role|responsib|day to day|daily|what do you do/i.test(m)) {
+    return "In my current role as <b>Marketing Analyst</b>, I handle:<br><br>&#128200; Campaign performance analysis<br>&#128202; Marketing dashboard development<br>&#128101; Customer segmentation<br>&#127919; Attribution analysis &amp; ROI measurement<br>&#128269; SEO performance tracking<br>&#9881; Conversion rate optimization (CRO)";
+  }
+
+  if (/why hire|why should|strength|value|bring|offer/i.test(m)) {
+    return "I bring a strong combination of <b>marketing knowledge, analytical thinking, and technical skills</b>. I have hands-on experience improving campaign performance, building dashboards, analyzing customer behavior, and supporting data-driven decisions. I'm a quick learner, collaborative, and always focused on delivering measurable business results. &#127919;";
+  }
+
+  if (/why interest|why this role|why apply|motivat/i.test(m)) {
+    return "I'm passionate about using data to solve real business problems! Roles in marketing analytics let me combine my love of data with strategic marketing thinking &#8212; improving customer engagement, optimizing campaigns, and driving growth. I'm always excited by opportunities to contribute meaningfully to a growing organization. &#127775;";
+  }
+
+  if (/visa|authoriz|sponsor|work permit|citizen|status|green card/i.test(m)) {
+    return "&#10003; I am <b>authorized to work in the United States</b> and do not require sponsorship at this time.";
+  }
+
+  if (/locat|where|city|state|reloc|remote|hybrid|onsite/i.test(m)) {
+    return "&#128205; I'm based in <b>New York, USA</b>. I'm open to remote, hybrid, or on-site roles. Also open to relocation for the right opportunity!";
+  }
+
+  if (/salary|compensat|pay|expect|rate|package/i.test(m)) {
+    return "I'm open to discussing compensation based on the role and overall opportunity. Looking for a competitive package that reflects my 4+ years of marketing analytics experience. Happy to discuss further! &#128522;";
+  }
+
+  if (/contact|email|phone|reach|number|call me/i.test(m)) {
+    return "&#128236; Here are my contact details:<br><br>&#128100; <b>Name:</b> Nagendra Babu Gugulothu<br>&#128231; <b>Email:</b> gugulothunagendra4@gmail.com<br>&#128222; <b>Phone:</b> (640) 500-1415<br>&#128205; <b>Location:</b> New York, USA<br><br>Feel free to reach out anytime!";
+  }
+
+  if (/schedul|interview|meet|availab|appoint|book|call/i.test(m)) {
+    return "__SCHEDULE__";
+  }
+
+  if (/linkedin|resume|cv/i.test(m)) {
+    return "I'd be happy to share my resume or LinkedIn! Please email me at <b>gugulothunagendra4@gmail.com</b> or call <b>(640) 500-1415</b> and I'll send it right over.";
+  }
+
+  if (/ga4|google analytics/i.test(m)) {
+    return "I have strong hands-on experience with <b>Google Analytics 4 (GA4)</b> &#8212; setting up events, conversions, funnels, audiences, and custom reports. I also use GA4 with BigQuery exports for advanced attribution modeling. &#128202;";
+  }
+
+  if (/attribut|mmm|marketing mix|multi.touch/i.test(m)) {
+    return "<b>Attribution modeling</b> is one of my specialties! I've worked with multi-touch attribution models (first-touch, last-touch, linear, data-driven) and <b>Marketing Mix Modeling (MMM)</b> to understand which channels truly drive conversions and optimize budget allocation. &#127919;";
+  }
+
+  if (/a\/b|ab test|split test|experiment/i.test(m)) {
+    return "I love A/B testing! I've designed and analyzed many experiments &#8212; landing page variations, email subject lines, CTA buttons, and ad creatives. I use statistical significance testing to make sure results are reliable before making decisions. &#128300;";
+  }
+
+  if (/sql|python|bigquery|snowflake|code|query/i.test(m)) {
+    return "I'm proficient in both <b>SQL and Python</b>! I use SQL daily for querying BigQuery and Snowflake, building data pipelines, and creating segmentation queries. With Python I automate reporting, run statistical analyses, and build predictive models for campaign optimization. &#128187;";
+  }
+
+  if (/tableau|power bi|dashboard|visual|report/i.test(m)) {
+    return "I build professional <b>marketing dashboards in both Tableau and Power BI</b>! They cover campaign performance, customer journeys, attribution, ROI tracking, and funnel analysis &#8212; designed to be executive-ready and connected to live data sources. &#128202;";
+  }
+
+  if (/google ads|meta ads|facebook ads|linkedin ads|paid ads|ppc/i.test(m)) {
+    return "I have extensive experience managing <b>Google Ads, Meta Ads (Facebook/Instagram), and LinkedIn Ads</b>. I handle campaign setup, audience targeting, bid optimization, creative testing, and performance analysis. I focus on maximizing ROAS and minimizing CPA. &#128226;";
+  }
+
+  if (/seo|sem|search engine|organic|keyword/i.test(m)) {
+    return "I have solid experience in <b>SEO &amp; SEM analytics</b> &#8212; keyword research, ranking analysis, organic traffic tracking, technical SEO audits, and paid search campaign optimization. I use tools like GA4, Google Search Console, and SEMrush. &#128269;";
+  }
+
+  if (/cro|conversion|funnel|landing page|optimize/i.test(m)) {
+    return "I specialize in <b>Conversion Rate Optimization (CRO)</b> and funnel analysis. I identify drop-off points in customer journeys, run A/B tests, and implement data-driven improvements that increase conversions and revenue. &#128200;";
+  }
+
+  if (/bye|goodbye|see you|that.s all|good night/i.test(m)) {
+    return "It was great chatting! &#128522; Feel free to reach out anytime at <b>gugulothunagendra4@gmail.com</b> or <b>(640) 500-1415</b>. Have a wonderful day! &#128075;";
+  }
+
+  if (/thank|thanks|appreciate|helpful|great/i.test(m)) {
+    return "You're very welcome! &#128522; Happy to help. Is there anything else you'd like to know about my experience or would you like to schedule an interview?";
+  }
+
+  return "Great question! I'd love to discuss this in more detail. You can reach me at <b>gugulothunagendra4@gmail.com</b> or <b>(640) 500-1415</b>. Or click <b>&#128197; Schedule</b> below to book an interview directly! &#128522;";
 }
 
 function showScheduleForm() {
-  const box = document.getElementById('chatBox');
-  const form = document.createElement('div');
-  form.className = 'form-bubble';
-  form.id = 'scheduleForm';
-  form.innerHTML = `
-    <h4>📅 Schedule an Interview with Nagendra</h4>
-    <input type="text" id="recName" placeholder="Your Full Name *" />
-    <input type="text" id="recCompany" placeholder="Company Name *" />
-    <input type="email" id="recEmail" placeholder="Your Email Address *" />
-    <input type="tel" id="recPhone" placeholder="Your Phone Number (optional)" />
-    <input type="text" id="recRole" placeholder="Role / Position *" />
-    <select id="recDate">
-      <option value="">Preferred Day *</option>
-      <option>Monday</option><option>Tuesday</option><option>Wednesday</option>
-      <option>Thursday</option><option>Friday</option>
-    </select>
-    <select id="recTime">
-      <option value="">Preferred Time (EST) *</option>
-      <option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option>
-      <option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option>
-      <option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option>
-    </select>
-    <select id="recFormat">
-      <option value="">Interview Format *</option>
-      <option>Phone Call</option><option>Video Call (Zoom)</option>
-      <option>Video Call (Teams)</option><option>Google Meet</option><option>In-Person</option>
-    </select>
-    <button class="submit-btn" onclick="submitSchedule()">✅ Confirm Interview Request</button>
-  `;
-  box.appendChild(form);
+  var f = document.createElement("div");
+  f.className = "fb"; f.id = "sform";
+  f.innerHTML = "<h4>&#128197; Schedule an Interview with Nagendra</h4>" +
+    "<input type='text' id='rn' placeholder='Your Full Name *' />" +
+    "<input type='text' id='rc' placeholder='Company Name *' />" +
+    "<input type='email' id='re' placeholder='Your Email *' />" +
+    "<input type='tel' id='rp' placeholder='Your Phone (optional)' />" +
+    "<input type='text' id='rr' placeholder='Role / Position *' />" +
+    "<select id='rd'><option value=''>Preferred Day *</option><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option></select>" +
+    "<select id='rt'><option value=''>Preferred Time (EST) *</option><option>9:00 AM</option><option>10:00 AM</option><option>11:00 AM</option><option>12:00 PM</option><option>1:00 PM</option><option>2:00 PM</option><option>3:00 PM</option><option>4:00 PM</option><option>5:00 PM</option></select>" +
+    "<select id='rf'><option value=''>Interview Format *</option><option>Phone Call</option><option>Zoom</option><option>Google Meet</option><option>Microsoft Teams</option><option>In-Person</option></select>" +
+    "<button class='ok' id='okbtn'>&#10003; Confirm Interview Request</button>";
+  box.appendChild(f);
   box.scrollTop = box.scrollHeight;
+  document.getElementById("okbtn").onclick = submitSchedule;
 }
 
 function submitSchedule() {
-  const name = document.getElementById('recName').value.trim();
-  const company = document.getElementById('recCompany').value.trim();
-  const email = document.getElementById('recEmail').value.trim();
-  const phone = document.getElementById('recPhone').value.trim();
-  const role = document.getElementById('recRole').value.trim();
-  const day = document.getElementById('recDate').value;
-  const time = document.getElementById('recTime').value;
-  const format = document.getElementById('recFormat').value;
+  var name = document.getElementById("rn").value.trim();
+  var comp = document.getElementById("rc").value.trim();
+  var email = document.getElementById("re").value.trim();
+  var phone = document.getElementById("rp").value.trim();
+  var role = document.getElementById("rr").value.trim();
+  var day = document.getElementById("rd").value;
+  var time = document.getElementById("rt").value;
+  var fmt = document.getElementById("rf").value;
 
-  if (!name || !company || !email || !role || !day || !time || !format) {
-    alert('Please fill in all required fields marked with *');
+  if (!name || !comp || !email || !role || !day || !time || !fmt) {
+    alert("Please fill in all required fields marked with *");
     return;
   }
 
-  const form = document.getElementById('scheduleForm');
-  if (form) form.remove();
+  var sf = document.getElementById("sform");
+  if (sf) sf.parentNode.removeChild(sf);
 
-  const summary = `✅ <strong>Interview Request Confirmed!</strong><br/><br/>
-📋 <strong>Summary:</strong><br/>
-👤 Recruiter: ${name}<br/>
-🏢 Company: ${company}<br/>
-📧 Email: ${email}<br/>
-${phone ? '📞 Phone: '+phone+'<br/>' : ''}
-💼 Role: ${role}<br/>
-📅 Preferred Day: ${day}<br/>
-🕐 Preferred Time: ${time} (EST)<br/>
-🎥 Format: ${format}<br/><br/>
-Thank you, <strong>${name}</strong>! Nagendra will confirm this appointment shortly via email at <strong>gugulothunagendra4@gmail.com</strong> or by phone at <strong>(640) 500-1415</strong>. Looking forward to connecting! 🎉`;
+  var msg = "&#10003; <b>Interview Request Confirmed!</b><br><br>" +
+    "&#128203; <b>Summary:</b><br>" +
+    "&#128100; Recruiter: " + name + "<br>" +
+    "&#127970; Company: " + comp + "<br>" +
+    "&#128231; Email: " + email + "<br>" +
+    (phone ? "&#128222; Phone: " + phone + "<br>" : "") +
+    "&#128188; Role: " + role + "<br>" +
+    "&#128197; Day: " + day + "<br>" +
+    "&#128336; Time: " + time + " (EST)<br>" +
+    "&#127909; Format: " + fmt + "<br><br>" +
+    "Thank you <b>" + name + "</b>! Nagendra will confirm shortly via email at <b>gugulothunagendra4@gmail.com</b> or phone <b>(640) 500-1415</b>. Looking forward to connecting! &#127881;";
 
-  appendMsg(summary, 'bot');
+  addMsg(msg, "b");
 
-  // Also open a mailto so Nagendra gets notified
-  const body = `Interview Request from ${name}\nCompany: ${company}\nEmail: ${email}\nPhone: ${phone}\nRole: ${role}\nDay: ${day}\nTime: ${time}\nFormat: ${format}`;
-  window.location.href = `mailto:gugulothunagendra4@gmail.com?subject=Interview Request from ${name} - ${company}&body=${encodeURIComponent(body)}`;
+  var body = "Interview Request\nName: " + name + "\nCompany: " + comp + "\nEmail: " + email + "\nPhone: " + phone + "\nRole: " + role + "\nDay: " + day + "\nTime: " + time + "\nFormat: " + fmt;
+  var sub = "Interview Request from " + name + " - " + comp;
+  window.location.href = "mailto:gugulothunagendra4@gmail.com?subject=" + encodeURIComponent(sub) + "&body=" + encodeURIComponent(body);
 }
 
-function sendSuggestion(text) {
-  const input = document.getElementById('userInput');
-  input.value = text;
-  sendMessage();
-}
-
-function sendMessage() {
-  const input = document.getElementById('userInput');
-  const text = input.value.trim();
-  if (!text) return;
-  input.value = '';
-
-  appendMsg(text, 'user', false);
-
+function send(txt) {
+  txt = txt.trim();
+  if (!txt) return;
+  addMsg(txt, "u");
   showTyping();
-  const delay = 800 + Math.random() * 600;
-
-  setTimeout(() => {
+  var delay = 700 + Math.floor(Math.random() * 500);
+  setTimeout(function() {
     removeTyping();
-    const reply = getBotReply(text);
-    if (reply === 'SCHEDULE_TRIGGER') {
-      appendMsg("I'd love to connect! 😊 Thank you for reaching out. I'm available <strong>Monday through Friday</strong> and completely flexible based on your schedule. Please fill out the form below to schedule our interview or call:", 'bot');
-      setTimeout(() => showScheduleForm(), 300);
+    var reply = getReply(txt);
+    if (reply === "__SCHEDULE__") {
+      addMsg("I'd love to connect! &#128522; I'm available <b>Monday through Friday</b> and flexible based on your schedule. Please fill out the form below:", "b");
+      setTimeout(showScheduleForm, 200);
     } else {
-      appendMsg(reply, 'bot');
+      addMsg(reply, "b");
     }
   }, delay);
 }
 
-// Welcome message on load
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    showTyping();
-    setTimeout(() => {
-      removeTyping();
-      appendMsg("👋 Hi there! I'm <strong>Nagendra Babu Gugulothu</strong>, a Marketing Analyst with 4+ years of experience in digital marketing, analytics, and data-driven campaign optimization based in New York.<br/><br/>Feel free to ask me anything about my background, skills, or experience — or click <strong>'Schedule'</strong> to book an interview! How can I help you today?", 'bot');
-    }, 1000);
-  }, 400);
-});
+snd.onclick = function() {
+  var v = inp.value;
+  inp.value = "";
+  send(v);
+};
 
-document.getElementById('userInput').focus();
+inp.onkeydown = function(e) {
+  if (e.key === "Enter") {
+    var v = inp.value;
+    inp.value = "";
+    send(v);
+  }
+};
+
+document.getElementById("s1").onclick = function() { send("Tell me about yourself"); };
+document.getElementById("s2").onclick = function() { send("What are your skills?"); };
+document.getElementById("s3").onclick = function() { send("Tell me about your experience"); };
+document.getElementById("s4").onclick = function() { send("I want to schedule an interview"); };
+document.getElementById("s5").onclick = function() { send("What is your contact info?"); };
+document.getElementById("s6").onclick = function() { send("Tell me about your education"); };
+
+// Welcome message
+setTimeout(function() {
+  showTyping();
+  setTimeout(function() {
+    removeTyping();
+    addMsg("&#128075; Hi there! I'm <b>Nagendra Babu Gugulothu</b>, a Marketing Analyst with 4+ years of experience in digital marketing and analytics, based in New York USA.<br><br>Ask me anything about my background, skills, experience &#8212; or click <b>&#128197; Schedule</b> to book an interview! How can I help you?", "b");
+  }, 1000);
+}, 400);
+
+inp.focus();
+
+})();
 </script>
 </body>
 </html>
