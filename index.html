@@ -252,15 +252,18 @@ function submitSchedule() {
 
   addMsg(msg, "b");
 
-  emailjs.send("service_id", "template_id", {
-      recruiter_name: name,
-      recruiter_email: email,
+  emailjs.send("service_yv7s8tl", "template_3eto1jo", {
+      candidate_name: "Nagendra Babu Gugulothu",
+      position: role,
       company: comp,
-      phone: phone || "Not provided",
-      role: role,
-      preferred_day: day,
-      preferred_time: time,
-      interview_format: fmt
+      interview_date: day,
+      interview_time: time + " (EST)",
+      interview_mode: fmt,
+      interviewer_name: name,
+      additional_message: phone ? "Phone: " + phone : "No phone provided",
+      from_name: name,
+      to_email: "nagendragugulothu6@gmail.com",
+      reply_to: email
     }).then(function() {
       console.log("Interview request sent successfully via EmailJS!");
     }, function(err) {
