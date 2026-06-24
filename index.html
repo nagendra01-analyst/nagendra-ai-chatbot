@@ -262,8 +262,8 @@ function submitSchedule() {
       interviewer_name: name,
       additional_message: phone ? "Phone: " + phone : "No phone provided",
       from_name: name,
-      to_email: "nagendragugulothu6@gmail.com",
-      reply_to: email
+      to_email: email,
+      reply_to: "nagendragugulothu6@gmail.com"
     }).then(function() {
       console.log("Interview request sent successfully via EmailJS!");
     }, function(err) {
