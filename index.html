@@ -7,7 +7,7 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Segoe UI,Arial,sans-serif;background:#0f172a;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px}
-.wrap{width:100%;max-width:500px;border-radius:20px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,0.5)}
+.wrap{width:100%;max-width:500px;border-radius:20hpx;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,0.5)}
 .hdr{background:linear-gradient(135deg,#6366f1,#8b5cf6);padding:16px 20px;display:flex;align-items:center;gap:14px}
 .av{width:54px;height:54px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;border:3px solid rgba(255,255,255,0.4)}
 .hi h2{color:#fff;font-size:1.05rem;font-weight:700;margin:0}
@@ -43,6 +43,7 @@ body{font-family:Segoe UI,Arial,sans-serif;background:#0f172a;min-height:100vh;d
 .ok{width:100%;background:linear-gradient(135deg,#6366f1,#8b5cf6);border:none;border-radius:8px;padding:10px;color:#fff;font-weight:700;font-size:0.85rem;cursor:pointer;margin-top:4px}
 .ok:hover{opacity:0.85}
 </style>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
 <div class="wrap">
@@ -68,6 +69,7 @@ body{font-family:Segoe UI,Arial,sans-serif;background:#0f172a;min-height:100vh;d
 <script>
 (function(){
 
+emailjs.init("YOUR_EMAILJS_PUBLIC_KEY"); // Replace with your EmailJS public key
 var box = document.getElementById("box");
 var inp = document.getElementById("inp");
 var snd = document.getElementById("snd");
@@ -146,7 +148,7 @@ function getReply(msg) {
   }
 
   if (/contact|email|phone|reach|number|call me/i.test(m)) {
-    return "&#128236; Here are my contact details:<br><br>&#128100; <b>Name:</b> Nagendra Babu Gugulothu<br>&#128231; <b>Email:</b> gugulothunagendra4@gmail.com<br>&#128222; <b>Phone:</b> (640) 500-1415<br>&#128205; <b>Location:</b> New York, USA<br><br>Feel free to reach out anytime!";
+    return "&#128236; Here are my contact details:<br><br>&#128100; <b>Name:</b> Nagendra Babu Gugulothu<br>&#128231; <b>Email:</b> nagendragugulothu6@gmail.com<br>&#128222; <b>Phone:</b> (640) 500-1415<br>&#128205; <b>Location:</b> New York, USA<br><br>Feel free to reach out anytime!";
   }
 
   if (/schedul|interview|meet|availab|appoint|book|call/i.test(m)) {
@@ -154,7 +156,7 @@ function getReply(msg) {
   }
 
   if (/linkedin|resume|cv/i.test(m)) {
-    return "I'd be happy to share my resume or LinkedIn! Please email me at <b>gugulothunagendra4@gmail.com</b> or call <b>(640) 500-1415</b> and I'll send it right over.";
+    return "I'd be happy to share my resume or LinkedIn! Please email me at <b>nagendragugulothu6@gmail.com</b> or call <b>(640) 500-1415</b> and I'll send it right over.";
   }
 
   if (/ga4|google analytics/i.test(m)) {
@@ -190,14 +192,14 @@ function getReply(msg) {
   }
 
   if (/bye|goodbye|see you|that.s all|good night/i.test(m)) {
-    return "It was great chatting! &#128522; Feel free to reach out anytime at <b>gugulothunagendra4@gmail.com</b> or <b>(640) 500-1415</b>. Have a wonderful day! &#128075;";
+    return "It was great chatting! &#128522; Feel free to reach out anytime at <b>nagendragugulothu6@gmail.com</b> or <b>(640) 500-1415</b>. Have a wonderful day! &#128075;";
   }
 
   if (/thank|thanks|appreciate|helpful|great/i.test(m)) {
     return "You're very welcome! &#128522; Happy to help. Is there anything else you'd like to know about my experience or would you like to schedule an interview?";
   }
 
-  return "Great question! I'd love to discuss this in more detail. You can reach me at <b>gugulothunagendra4@gmail.com</b> or <b>(640) 500-1415</b>. Or click <b>&#128197; Schedule</b> below to book an interview directly! &#128522;";
+  return "Great question! I'd love to discuss this in more detail. You can reach me at <b>nagendragugulothu6@gmail.com</b> or <b>(640) 500-1415</b>. Or click <b>&#128197; Schedule</b> below to book an interview directly! &#128522;";
 }
 
 function showScheduleForm() {
@@ -246,13 +248,27 @@ function submitSchedule() {
     "&#128197; Day: " + day + "<br>" +
     "&#128336; Time: " + time + " (EST)<br>" +
     "&#127909; Format: " + fmt + "<br><br>" +
-    "Thank you <b>" + name + "</b>! Nagendra will confirm shortly via email at <b>gugulothunagendra4@gmail.com</b> or phone <b>(640) 500-1415</b>. Looking forward to connecting! &#127881;";
+    "Thank you <b>" + name + "</b>! Nagendra will confirm shortly via email at <b>nagendragugulothu6@gmail.com</b> or phone <b>(640) 500-1415</b>. Looking forward to connecting! &#127881;";
 
   addMsg(msg, "b");
 
-  var body = "Interview Request\nName: " + name + "\nCompany: " + comp + "\nEmail: " + email + "\nPhone: " + phone + "\nRole: " + role + "\nDay: " + day + "\nTime: " + time + "\nFormat: " + fmt;
-  var sub = "Interview Request from " + name + " - " + comp;
-  window.location.href = "mailto:gugulothunagendra4@gmail.com?subject=" + encodeURIComponent(sub) + "&body=" + encodeURIComponent(body);
+  emailjs.send("service_id", "template_id", {
+      recruiter_name: name,
+      recruiter_email: email,
+      company: comp,
+      phone: phone || "Not provided",
+      role: role,
+      preferred_day: day,
+      preferred_time: time,
+      interview_format: fmt
+    }).then(function() {
+      console.log("Interview request sent successfully via EmailJS!");
+    }, function(err) {
+      // Fallback to mailto if EmailJS fails
+      var body = "Interview Request\nName: " + name + "\nCompany: " + comp + "\nEmail: " + email + "\nPhone: " + (phone || "N/A") + "\nRole: " + role + "\nDay: " + day + "\nTime: " + time + " (EST)\nFormat: " + fmt;
+      var sub = "Interview Request from " + name + " - " + comp;
+      window.location.href = "mailto:nagendragugulothu6@gmail.com?subject=" + encodeURIComponent(sub) + "&body=" + encodeURIComponent(body);
+    })
 }
 
 function send(txt) {
